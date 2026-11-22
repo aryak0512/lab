@@ -88,7 +88,7 @@ abstract class FileWriteTask : DefaultTask() {
     fun action() {
         print(message)
         val file = filePath.get().asFile
-        file.createNewFile();
+        file.createNewFile()
         file.writeText(message)
     }
 }
@@ -113,4 +113,11 @@ tasks.register<Zip>("testResultsZipTask") {
 
 tasks.named("test") {
     finalizedBy("testResultsZipTask")
+}
+
+coverageLock {
+    goal = 0.80f
+    resultFile = file("build/TestResults.zip")
+    jacocoMetric = "INSTRUCTION"
+    isCi = false
 }
