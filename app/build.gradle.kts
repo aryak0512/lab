@@ -115,6 +115,7 @@ tasks.named("test") {
     finalizedBy("testResultsZipTask")
 }
 
+// coverageLock: this is the extension for the plugin
 coverageLock {
     goal = 0.80f
     resultFile = file("build/TestResults.zip")
