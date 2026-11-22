@@ -44,18 +44,41 @@ tasks.named<Test>("test") {
 }
 
 // our custom class declaration
-abstract class HelloTask: DefaultTask(){
+abstract class HelloTask : DefaultTask() {
 
     @Input
     var inputString = ""
 
     @TaskAction
-    fun action(){
+    fun action() {
         print(inputString)
     }
 }
 
 // registering our custom task with the name of task as "hello"
-tasks.register<HelloTask>("hello"){
+tasks.register<HelloTask>("hello") {
     inputString = "Test string"
+}
+
+// second task that writes message to a file in build directory
+abstract class FileWriteTask : DefaultTask() {
+
+    @get:Input
+    abstract var message: String
+
+    @get:OutputFile
+    abstract val filePath: RegularFileProperty
+
+    @TaskAction
+    fun action() {
+        print(message)
+        val file = filePath.get().asFile
+        file.createNewFile();
+        file.writeText(message)
+    }
+}
+
+tasks.register<FileWriteTask>("fileWriteTask") {
+    message = "Hi from Aryak"
+    filePath = layout.buildDirectory.file("Hello.txt")
 }
