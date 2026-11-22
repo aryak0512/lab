@@ -42,3 +42,15 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+// our custom class declaration
+abstract class HelloTask: DefaultTask(){
+
+    @TaskAction
+    fun action(){
+        print("Hello World")
+    }
+}
+
+// registering our custom task with the name of task as "hello"
+tasks.register<HelloTask>("hello")
