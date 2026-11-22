@@ -57,6 +57,8 @@ abstract class HelloTask : DefaultTask() {
 
 // registering our custom task with the name of task as "hello"
 tasks.register<HelloTask>("hello") {
+    group = "distribution"
+    description = "My first cool task!"
     inputString = "Test string"
 }
 
@@ -79,12 +81,16 @@ abstract class FileWriteTask : DefaultTask() {
 }
 
 tasks.register<FileWriteTask>("fileWriteTask") {
+    group = "distribution"
+    description = "Writes a message to a text file in the build directory"
     message = "Hi from Aryak"
     filePath = layout.buildDirectory.file("Hello.txt")
 }
 
 // using a Gradle built-in zip task
 tasks.register<Zip>("testResultsZipTask") {
+    group = "distribution"
+    description = "Zips test archives"
 
     dependsOn("test")
     archiveFileName = "TestResults.zip"
@@ -92,6 +98,6 @@ tasks.register<Zip>("testResultsZipTask") {
     from(layout.buildDirectory.dir("test-results"))
 }
 
-tasks.named("test"){
+tasks.named("test") {
     finalizedBy("testResultsZipTask")
 }
