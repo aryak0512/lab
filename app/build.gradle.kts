@@ -46,11 +46,16 @@ tasks.named<Test>("test") {
 // our custom class declaration
 abstract class HelloTask: DefaultTask(){
 
+    @Input
+    var inputString = ""
+
     @TaskAction
     fun action(){
-        print("Hello World")
+        print(inputString)
     }
 }
 
 // registering our custom task with the name of task as "hello"
-tasks.register<HelloTask>("hello")
+tasks.register<HelloTask>("hello"){
+    inputString = "Test string"
+}
