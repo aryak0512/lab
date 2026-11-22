@@ -10,7 +10,7 @@ plugins {
     application
     id("com.dorongold.task-tree") version "4.0.2"
 
-    // my custom plugin that shows test coverage
+    // my custom gradle plugin that shows test coverage
     id("com.aryak.coveragelock")
 }
 
