@@ -9,6 +9,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     id("com.dorongold.task-tree") version "4.0.2"
+
+    // my custom plugin that shows test coverage
     id("com.aryak.coveragelock")
 }
 
