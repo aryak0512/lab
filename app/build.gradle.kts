@@ -85,7 +85,13 @@ tasks.register<FileWriteTask>("fileWriteTask") {
 
 // using a Gradle built-in zip task
 tasks.register<Zip>("testResultsZipTask") {
+
+    dependsOn("test")
     archiveFileName = "TestResults.zip"
     destinationDirectory = layout.buildDirectory
     from(layout.buildDirectory.dir("test-results"))
+}
+
+tasks.named("test"){
+    finalizedBy("testResultsZipTask")
 }
