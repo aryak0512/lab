@@ -82,3 +82,10 @@ tasks.register<FileWriteTask>("fileWriteTask") {
     message = "Hi from Aryak"
     filePath = layout.buildDirectory.file("Hello.txt")
 }
+
+// using a Gradle built-in zip task
+tasks.register<Zip>("testResultsZipTask") {
+    archiveFileName = "TestResults.zip"
+    destinationDirectory = layout.buildDirectory
+    from(layout.buildDirectory.dir("test-results"))
+}
