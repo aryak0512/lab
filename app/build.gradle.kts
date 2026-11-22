@@ -51,7 +51,7 @@ abstract class HelloTask : DefaultTask() {
 
     @TaskAction
     fun action() {
-        print(inputString)
+        println(inputString)
     }
 }
 
@@ -60,6 +60,14 @@ tasks.register<HelloTask>("hello") {
     group = "distribution"
     description = "My first cool task!"
     inputString = "Test string"
+
+    doFirst {
+        println("doFirst executed")
+    }
+
+    doLast {
+        println("doLast executed")
+    }
 }
 
 // second task that writes message to a file in build directory
