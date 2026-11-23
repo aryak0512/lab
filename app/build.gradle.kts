@@ -13,7 +13,7 @@ plugins {
     id("com.dorongold.task-tree") version "4.0.2"
 
     // my custom gradle plugin that shows test coverage
-    id("com.aryak.coveragelock")
+    id("com.aryak.btt")
 }
 
 repositories {
@@ -113,12 +113,4 @@ tasks.register<Zip>("testResultsZipTask") {
 
 tasks.named("test") {
     finalizedBy("testResultsZipTask")
-}
-
-// coverageLock: this is the extension for the plugin
-coverageLock {
-    goal = 0.80f
-    resultFile = file("build/TestResults.zip")
-    jacocoMetric = "INSTRUCTION"
-    isCi = false
 }
