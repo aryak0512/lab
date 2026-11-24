@@ -6,13 +6,8 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
     application
-
-    // a third party plugin that lists tasks as trees
     id("com.dorongold.task-tree") version "4.0.2"
-
-    // my custom gradle plugin that shows test coverage
     id("com.aryak.btt")
 }
 
