@@ -19,11 +19,7 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // This dependency is used by the application.
-    implementation(libs.guava)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -41,71 +37,4 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
-}
-
-// our custom class declaration
-abstract class HelloTask : DefaultTask() {
-
-    @Input
-    var inputString = ""
-
-    @TaskAction
-    fun action() {
-        println(inputString)
-    }
-}
-
-// registering our custom task with the name of task as "hello"
-tasks.register<HelloTask>("hello") {
-    group = "distribution"
-    description = "My first cool task!"
-    inputString = "Test string"
-
-    doFirst {
-        println("doFirst executed")
-    }
-
-    doLast {
-        println("doLast executed")
-    }
-}
-
-// second task that writes message to a file in build directory
-abstract class FileWriteTask : DefaultTask() {
-
-    @get:Input
-    abstract var message: String
-
-    @get:OutputFile
-    abstract val filePath: RegularFileProperty
-
-    @TaskAction
-    fun action() {
-        print(message)
-        val file = filePath.get().asFile
-        file.createNewFile()
-        file.writeText(message)
-    }
-}
-
-tasks.register<FileWriteTask>("fileWriteTask") {
-    group = "distribution"
-    description = "Writes a message to a text file in the build directory"
-    message = "Hi from Aryak"
-    filePath = layout.buildDirectory.file("Hello.txt")
-}
-
-// using a Gradle built-in zip task
-tasks.register<Zip>("testResultsZipTask") {
-    group = "distribution"
-    description = "Zips test archives"
-
-    dependsOn("test")
-    archiveFileName = "TestResults.zip"
-    destinationDirectory = layout.buildDirectory
-    from(layout.buildDirectory.dir("test-results"))
-}
-
-tasks.named("test") {
-    finalizedBy("testResultsZipTask")
 }
