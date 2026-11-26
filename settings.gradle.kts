@@ -15,3 +15,19 @@ plugins {
 
 rootProject.name = "lab"
 include("app")
+
+buildCache {
+    local {
+        //directory = File("/tmp/any/path")
+        isEnabled = true
+    }
+//    remote<HttpBuildCache> {
+//        url = uri("")
+//        isEnabled = true
+//        isPush = true // to be allowed only from CI machines
+//        credentials {
+//            username = System.getenv("REMOTE_CACHE_USER")
+//            password = System.getenv("REMOTE_CACHE_PASS")
+//        }
+//    }
+}

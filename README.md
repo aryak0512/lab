@@ -83,3 +83,9 @@ To see the build scan report:
 ```bash
 ./gradlew clean build --scan
 ```
+
+### Setting up remote cache
+
+- Free (Docker)
+    - https://hub.docker.com/r/gradle/build-cache-node
+- Develocity (paid)
