@@ -1,5 +1,6 @@
 (base) aryak@Aryaks-MacBook-Pro lab % ./gradlew app:build app:taskTree
 Calculating task graph as no cached configuration is available for tasks: app:build app:taskTree
+
 ```adlanguage
 > Task :app:processResources SKIPPED
 > Task :app:processTestResources SKIPPED
@@ -17,9 +18,11 @@ Calculating task graph as no cached configuration is available for tasks: app:bu
 > Task :app:build SKIPPED
 > Task :app:taskTree
 ```
+
 ------------------------------------------------------------
 Project ':app'
 ------------------------------------------------------------
+
 ```adlanguage
 :app:build
 +--- :app:assemble
@@ -50,9 +53,33 @@ Project ':app'
 (*) - subtree omitted (printed previously)
 Add --repeat to allow printing a subtree of the same task more than once.
 
-To see task dependency tree for a specific task, run gradlew <project-path>:<task> <project-path>:taskTree [--depth <depth>] [--with-inputs] [--with-outputs] [--with-description] [--repeat]
+To see task dependency tree for a specific task, run gradlew <project-path>:<task> <project-path>:
+taskTree [--depth <depth>] [--with-inputs] [--with-outputs] [--with-description] [--repeat]
 Executions of all tasks except for taskTree are skipped. They are used for building the task graph only.
 
 BUILD SUCCESSFUL in 570ms
 1 actionable task: 1 executed
 Configuration cache entry stored.
+
+## Local cache and Build scans
+
+- Incremental build is supported by default since Gradle v1.0 (2012)
+- Local and remote builds feature was added in Gradle v4.0 (2017)
+
+To enable local caching
+
+```bash
+org.gradle.caching=true
+```
+
+The cache gets created at :
+
+```bash
+~/.gradle/build-caches/
+```
+
+To see the build scan report:
+
+```bash
+./gradlew clean build --scan
+```
